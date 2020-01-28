@@ -16,6 +16,7 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
+import {generalListStyle} from './DeviceList'
 
 
 // One VT Status Detail page.
@@ -28,6 +29,7 @@ class VTStatusPage extends Component {
   render() {
 
     const { navigation } = this.props;
+    const name = navigation.getParam('name', 'N/A');
     const status = navigation.getParam('status', 'N/A');
     const temp = navigation.getParam('temp', 'N/A');
     const wind = navigation.getParam('wind', 'N/A');
@@ -39,8 +41,7 @@ class VTStatusPage extends Component {
         <ScrollView style={[vtStatusPageStyle.container]} scrollEnabled={true} >
 
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-            <Text style={vtStatusPageStyle.heading}>Just A Random Turbine</Text>
-            <Button title="R" ></Button>
+            <Text style={vtStatusPageStyle.heading}>{name}</Text>
           </View>
 
           <StatRow firstRow='true'>
@@ -51,7 +52,7 @@ class VTStatusPage extends Component {
           <StatRowDisplay leftText='Core Temperature' rightText={temp + '˚C'}/>
           <StatRowDisplay leftText='Wind Speed' rightText={wind + ' m/s'} />
           <StatRowDisplay leftText='Battery Level' rightText={battery + '%'} />
-          <StatRowDisplay leftText='Current Power' rightText='35.4 W' />
+          <StatRowDisplay leftText='Current Power' rightText={power + ' W'}/>
 
           <StatRow>
             <TouchableOpacity onPress={() => {Alert.alert("Rename Pressed!")}} >
@@ -107,23 +108,9 @@ const vtStatusPageStyle = StyleSheet.create({
     fontSize: 32,
   },
 
-  statRow: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  statRow: generalListStyle.listRow,
 
-    marginHorizontal: 20,
-    paddingVertical: 10,
-    borderTopWidth: 0.3,
-
-    fontSize: 24,
-  },
-
-  statRowLabel: {
-    flex: 1,
-
-    fontSize: 18,
-  },
+  statRowLabel: generalListStyle.listRowLabel,
 
   buttonStyle: {
     color: "blue",
