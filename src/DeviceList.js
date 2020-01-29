@@ -28,7 +28,7 @@ class DeviceList extends Component {
       <FlatList
         data={sampleData}
         renderItem={renderListItem.bind(this)}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.name}
       />
     );
   }
@@ -44,7 +44,6 @@ function renderListItem({item}) {
 }
 
 const sampleData = [{
-    id: 1,
     name: 'Just A Turbine',
     status: 'normal',
     time: null,
@@ -54,7 +53,6 @@ const sampleData = [{
     power: 35.4,
   },
   {
-    id: 2,
     name: 'Another Turbine',
     status: 'dead',
     time: null,
