@@ -17,6 +17,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import {ListRow} from "./ListComponent.js";
 
 class DeviceList extends Component {
   constructor(props) {
@@ -35,13 +36,19 @@ class DeviceList extends Component {
 
 }
 
-function renderListItem({item}) {
-  return (<Button
-        title={item.name}
-        onPress={() => {this.props.navigation.navigate('Details', item);}}
-      />);
+function renderListItem({item, index, separators}) {
+  const firstRow = index == 0 ? 'true' : 'false';
+
+  return (
+    <ListRow firstRow={firstRow}>
+      <TouchableOpacity onPress={() => {this.props.navigation.navigate('Details', item);}} >
+        <Text style={deviceListStyle.buttonStyle}>{item.name}</Text>
+      </TouchableOpacity>
+    </ListRow>
+  );
 
 }
+
 
 const sampleData = [{
     name: 'Just A Turbine',
@@ -62,24 +69,12 @@ const sampleData = [{
     power: 0.0,
 }];
 
-export const generalListStyle = StyleSheet.create({
-  listRow: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    marginHorizontal: 20,
-    paddingVertical: 10,
-    borderTopWidth: 0.3,
-
-    fontSize: 24,
-  },
-
-  listRowLabel: {
-    flex: 1,
-
-    fontSize: 18,
+const deviceListStyle = StyleSheet.create({
+  buttonStyle: {
+    fontSize: 20,
+    margin: 10,
   },
 });
+
 
 export default DeviceList;

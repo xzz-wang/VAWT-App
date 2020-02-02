@@ -16,7 +16,7 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import {generalListStyle} from './DeviceList'
+import { ListRow } from './ListComponent.js';
 
 
 // One VT Status Detail page.
@@ -44,21 +44,21 @@ class VTStatusPage extends Component {
             <Text style={vtStatusPageStyle.heading}>{name}</Text>
           </View>
 
-          <StatRow firstRow='true'>
+          <ListRow firstRow='true'>
             <Text style={vtStatusPageStyle.statRowLabel}>Status</Text>
             <Text style={[vtStatusPageStyle.statRowLabel, {textAlign: 'right',}]}>{status}</Text>
-          </StatRow>
+          </ListRow>
 
           <StatRowDisplay leftText='Core Temperature' rightText={temp + '˚C'}/>
           <StatRowDisplay leftText='Wind Speed' rightText={wind + ' m/s'} />
           <StatRowDisplay leftText='Battery Level' rightText={battery + '%'} />
           <StatRowDisplay leftText='Current Power' rightText={power + ' W'}/>
 
-          <StatRow>
+          <ListRow>
             <TouchableOpacity onPress={() => {Alert.alert("Rename Pressed!")}} >
               <Text style={vtStatusPageStyle.buttonStyle}>Rename</Text>
             </TouchableOpacity>
-          </StatRow>
+          </ListRow>
 
 
         </ScrollView>
@@ -69,33 +69,14 @@ class VTStatusPage extends Component {
 
 function StatRowDisplay(props) {
   return (
-    <StatRow>
+    <ListRow>
       <Text style={vtStatusPageStyle.statRowLabel}>{props.leftText}</Text>
       <Text style={[vtStatusPageStyle.statRowLabel, {textAlign: 'right',}]}>{props.rightText}</Text>
-    </StatRow>
+    </ListRow>
   );
 }
 
 
-function StatRow(props) {
-
-  //const children = props.children;
-  const children = props.children;
-
-  if (props.firstRow != 'true') {
-    return (
-      <View style={vtStatusPageStyle.statRow}>
-        {children}
-      </View>
-    );
-  } else {
-    return (
-      <View style={[vtStatusPageStyle.statRow, {borderTopWidth: 0.0,}]}>
-        {children}
-      </View>
-    )
-  }
-}
 
 const vtStatusPageStyle = StyleSheet.create({
   container: {
@@ -108,12 +89,13 @@ const vtStatusPageStyle = StyleSheet.create({
     fontSize: 32,
   },
 
-  statRow: generalListStyle.listRow,
-
-  statRowLabel: generalListStyle.listRowLabel,
-
   buttonStyle: {
     color: "blue",
+    fontSize: 18,
+  },
+
+  statRowLabel: {
+    flex: 1,
     fontSize: 18,
   },
 });
