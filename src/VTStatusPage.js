@@ -23,21 +23,16 @@ import { ListRow } from './ListComponent.js';
 class VTStatusPage extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
+    const props = this.props;
 
-    const { navigation } = this.props;
-    const name = navigation.getParam('name', 'N/A');
-    const status = navigation.getParam('status', 'N/A');
-    const temp = navigation.getParam('temp', 'N/A');
-    const wind = navigation.getParam('wind', 'N/A');
-    const battery = navigation.getParam('battery', 'N/A');
-    const power = navigation.getParam('power', 'N/A');
+    const {name, status, temp, wind, battery, power} = props.route.params;
 
     return(
       <SafeAreaView style={vtStatusPageStyle.container}>
+        <StatusBar barStyle="light-content" />
         <ScrollView style={[vtStatusPageStyle.container]} scrollEnabled={true} >
 
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
