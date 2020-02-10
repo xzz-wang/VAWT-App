@@ -30,9 +30,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 // Import Customized Components
 import VTStatusPage from './VTStatusPage.js';
 import DeviceList from './DeviceList.js';
+import OverviewPage from './OverviewPage.js'
 
 
-const Stack = createStackNavigator();
+const ListStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
@@ -42,7 +43,17 @@ const AccentColor = 'green';
 function App () {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator initialRouteName="Overview" drawerType='back'
+        drawerStyle={{
+          width: 180,
+        }}>
+        <Drawer.Screen
+          name="Overview"
+          component={OverviewPage}
+          options={{
+            title: 'Overview'
+          }}
+        />
         <Drawer.Screen
           name="ListView"
           component={ListView}
@@ -55,30 +66,43 @@ function App () {
   );
 }
 
+
 function ListView() {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
+    <ListStack.Navigator initialRouteName="Home">
+      <ListStack.Screen
         name="Home"
         component={DeviceList}
-        options={{
+        options={({ navigation, route }) => ({
           title: 'Device List',
+          headerLeft: () => openDrawerButton(navigation),
+          headerStyle: {
+            backgroundColor: AccentColor,
+          },
+          headerTintColor: '#fff',
+        })}
+      />
+      <ListStack.Screen
+        name="Details"
+        component={VTStatusPage}
+        options={{
           headerStyle: {
             backgroundColor: AccentColor,
           },
           headerTintColor: '#fff',
         }}
       />
-      <Stack.Screen
-        name="Details"
-        component={VTStatusPage}
-        options={{
-          headerStyle: {
-            backgroundColor: AccentColor,
-          }}
-        }
-      />
-    </Stack.Navigator>
+    </ListStack.Navigator>
+  );
+}
+
+function openDrawerButton(navigation) {
+  return (
+    <Button
+      onPress={()=>{navigation.toggleDrawer()}}
+      title=' <'
+      color='#fff'
+    />
   );
 }
 

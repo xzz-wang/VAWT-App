@@ -75,7 +75,8 @@ function StatRowDisplay(props) {
 
 const vtStatusPageStyle = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#fff'
   },
 
   heading: {
