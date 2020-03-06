@@ -30,7 +30,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 // Import Customized Components
 import VTStatusPage from './VTStatusPage.js';
 import DeviceList from './DeviceList.js';
-import OverviewPage from './OverviewPage.js'
+import OverviewPage from './OverviewPage.js';
+import TestPage from './TestPage.js';
 
 
 const ListStack = createStackNavigator();
@@ -43,7 +44,7 @@ const AccentColor = 'green';
 function App () {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Overview" drawerType='back'
+      <Drawer.Navigator initialRouteName="TestView" drawerType='back'
         drawerStyle={{
           width: 180,
         }}>
@@ -59,6 +60,13 @@ function App () {
           component={ListView}
           options={{
             title: 'List of Devices',
+          }}
+        />
+        <Drawer.Screen
+          name="TestView"
+          component={TestPage}
+          options={{
+            title: 'For testing',
           }}
         />
       </Drawer.Navigator>
